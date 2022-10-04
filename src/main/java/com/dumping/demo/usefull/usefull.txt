@@ -1,0 +1,234 @@
+ public static List<Associate> convertExcelToListOfAssociate(InputStream is) {
+        List<Associate> list1 = new ArrayList<>();
+
+        try {
+            Workbook workbook = new XSSFWorkbook(is);
+            DataFormatter dataFormatter = new DataFormatter();
+            Iterator<Sheet> sheets = workbook.sheetIterator();
+
+            while(sheets.hasNext()) {
+                Sheet sh = sheets.next();
+                Iterator<Row> iterator = sh.iterator();
+               // System.out.println("Sheet name is " + sh.getSheetName());
+               // System.out.println("-----------------------------------");
+                List<String> lst = List.of("Associate ID","Associate Name","SID",
+                		"Project ID","Grade Description","On/Off");
+                List<String> indexes=new ArrayList<String>();
+
+//                Iterator<Row> iterator = sh.iterator();
+                int index_no=0;
+                while (iterator.hasNext()&&index_no!=1) {
+                    index_no++;
+                    Row row = iterator.next();
+                    Iterator<Cell> cellIterator = row.iterator();
+
+
+
+                    while (cellIterator.hasNext()) {
+                        Cell cell = cellIterator.next();
+                        String cellValue = dataFormatter.formatCellValue(cell);
+                        indexes.add(cellValue);
+                        for (String s:lst) {
+                            if (cellValue.equalsIgnoreCase(s)) {
+
+
+                                System.out.print(cellValue + "\t");
+                            }
+                        }
+                    }
+                    System.out.println();
+                }
+//=========================================
+
+
+
+                while (iterator.hasNext()) {
+                    Row row = iterator.next();
+                    Iterator<Cell> cellIterator = row.iterator();
+                    int tmp_index=0;
+
+
+                    Associate p = new Associate();
+                    while (cellIterator.hasNext()) {
+                        Cell cell = cellIterator.next();
+                        String cellValue = dataFormatter.formatCellValue(cell);
+                        for (String s:lst) {
+                            if (indexes.get(tmp_index).equalsIgnoreCase(s)) {
+                                p.setProperty(s,cellValue);
+
+                               // System.out.print(cellValue + "\t");
+                            }
+                        }
+                        tmp_index++;
+                    }
+                    list1.add(p);
+                   // System.out.println();
+                }
+            }
+            workbook.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list1;
+
+    }
+    
+    
+    
+    
+    
+//    public static List<Project> convertExcelToListOfProject(InputStream is) {
+//        List<Project> list1 = new ArrayList<>();
+//
+//        try {
+//            Workbook workbook = new XSSFWorkbook(is);
+//            DataFormatter dataFormatter = new DataFormatter();
+//            Iterator<Sheet> sheets = workbook.sheetIterator();
+//
+//            while(sheets.hasNext()) {
+//                Sheet sh = sheets.next();
+//                Iterator<Row> iterator = sh.iterator();
+//               // System.out.println("Sheet name is " + sh.getSheetName());
+//               // System.out.println("-----------------------------------");
+//                List<String> lst = List.of("Project ID", "Project Description","Project Billability", "Project Type",
+//                		"Project Manager ID","Project Manager Name","Project Start Date","Project End Date");
+//                List<String> indexes=new ArrayList<String>();
+//
+////                Iterator<Row> iterator = sh.iterator();
+//                int index_no=0;
+//                while (iterator.hasNext()&&index_no!=1) {
+//                    index_no++;
+//                    Row row = iterator.next();
+//                    Iterator<Cell> cellIterator = row.iterator();
+//
+//
+//
+//                    while (cellIterator.hasNext()) {
+//                        Cell cell = cellIterator.next();
+//                        String cellValue = dataFormatter.formatCellValue(cell);
+//                        indexes.add(cellValue);
+//                        for (String s:lst) {
+//                            if (cellValue.equalsIgnoreCase(s)) {
+//
+//
+//                                System.out.print(cellValue + "\t");
+//                            }
+//                        }
+//                    }
+//                    System.out.println();
+//                }
+////=========================================
+//
+//
+//
+//                while (iterator.hasNext()) {
+//                    Row row = iterator.next();
+//                    Iterator<Cell> cellIterator = row.iterator();
+//                    int tmp_index=0;
+//
+//
+//                    Project p = new Project();
+//                    while (cellIterator.hasNext()) {
+//                        Cell cell = cellIterator.next();
+//                        String cellValue = dataFormatter.formatCellValue(cell);
+//                        for (String s:lst) {
+//                            if (indexes.get(tmp_index).equalsIgnoreCase(s)) {
+//                                p.setProperty(s,cellValue);
+//
+//                               // System.out.print(cellValue + "\t");
+//                            }
+//                        }
+//                        tmp_index++;
+//                    }
+//                    list1.add(p);
+//                   // System.out.println();
+//                }
+//            }
+//            workbook.close();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return list1;
+//
+//    }
+//
+//
+//    //convert excel to list of products
+//
+//    public static List<Account> convertExcelToListOfAccount(InputStream is) {
+//        List<Account> list = new ArrayList<>();
+//
+//        try {
+//            Workbook workbook = new XSSFWorkbook(is);
+//            DataFormatter dataFormatter = new DataFormatter();
+//            Iterator<Sheet> sheets = workbook.sheetIterator();
+//
+//            while(sheets.hasNext()) {
+//                Sheet sh = sheets.next();
+//                Iterator<Row> iterator = sh.iterator();
+//               // System.out.println("Sheet name is " + sh.getSheetName());
+//               // System.out.println("-----------------------------------");
+//                List<String> lst = List.of("Account ID", "Account Name","Account Manager ID", "Account Manager Name");
+//                List<String> indexes=new ArrayList<String>();
+//
+////                Iterator<Row> iterator = sh.iterator();
+//                int index_no=0;
+//                while (iterator.hasNext()&&index_no!=1) {
+//                    index_no++;
+//                    Row row = iterator.next();
+//                    Iterator<Cell> cellIterator = row.iterator();
+//
+//
+//
+//                    while (cellIterator.hasNext()) {
+//                        Cell cell = cellIterator.next();
+//                        String cellValue = dataFormatter.formatCellValue(cell);
+//                        indexes.add(cellValue);
+//                        for (String s:lst) {
+//                            if (cellValue.equalsIgnoreCase(s)) {
+//
+//
+//                                System.out.print(cellValue + "\t");
+//                            }
+//                        }
+//                    }
+//                    System.out.println();
+//                }
+////=========================================
+//
+//
+//
+//                while (iterator.hasNext()) {
+//                    Row row = iterator.next();
+//                    Iterator<Cell> cellIterator = row.iterator();
+//                    int tmp_index=0;
+//
+//
+//                    Account p = new Account();
+//                    while (cellIterator.hasNext()) {
+//                        Cell cell = cellIterator.next();
+//                        String cellValue = dataFormatter.formatCellValue(cell);
+//                        for (String s:lst) {
+//                            if (indexes.get(tmp_index).equalsIgnoreCase(s)) {
+//                                p.setProperty(s,cellValue);
+//
+//                               // System.out.print(cellValue + "\t");
+//                            }
+//                        }
+//                        tmp_index++;
+//                    }
+//                    list.add(p);
+//                   // System.out.println();
+//                }
+//            }
+//            workbook.close();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return list;
+//
+//    }
+//
