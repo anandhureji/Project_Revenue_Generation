@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.dumping.demo.service.AccountService;
 import com.dumping.demo.service.AssociateService;
+import com.dumping.demo.service.BillRateService;
 import com.dumping.demo.service.ProjectService;
 
 import java.text.ParseException;
@@ -29,6 +30,9 @@ public class AccountController {
     
     @Autowired
     private AssociateService associateService;
+    
+    @Autowired
+    private BillRateService billRateService;
 
     @PostMapping("/account/upload")
     public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file) throws ParseException {
@@ -38,8 +42,10 @@ public class AccountController {
             this.accountService.save(file);
             
             this.projectService.save(file);
-            
+//            
             this.associateService.save(file);
+        	
+//        	this.billRateService.save(file);
 
             return ResponseEntity.ok(Map.of("message", "File is uploaded and data is saved to db"));
 

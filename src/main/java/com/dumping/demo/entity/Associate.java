@@ -3,12 +3,15 @@ package com.dumping.demo.entity;
 import java.text.ParseException;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Associate {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int a_id;
 	private int associate_id;
 	private String name;

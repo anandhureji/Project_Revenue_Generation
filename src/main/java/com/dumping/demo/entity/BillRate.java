@@ -11,6 +11,7 @@ public class BillRate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int bill_id;
+	private int associate_id;
 	private String associate_name;
 	private int project_id;
 	private int bill_hours;
@@ -23,9 +24,8 @@ public class BillRate {
 	    {
 	        switch (property)
 	        {
-	            case "Associate Name" :
-	                this.setAssociate_name(data);
-	                break;
+	        
+	            
 	            case "Project ID" :
 	                this.setProject_id(Integer.parseInt(data));
 	                break;
@@ -37,6 +37,20 @@ public class BillRate {
 	                break;
 	        }
 	    }
+	 
+	 
+
+	public int getAssociate_id() {
+		return associate_id;
+	}
+
+
+
+	public void setAssociate_id(int associate_id) {
+		this.associate_id = associate_id;
+	}
+
+
 
 	public int getBill_id() {
 		return bill_id;
@@ -102,9 +116,10 @@ public class BillRate {
 		this.leave_days = leave_days;
 	}
 
-	public BillRate(int bill_id, String associate_name, int project_id, int bill_hours, int bill_rate, int bill_period,
+	public BillRate(int associate_id,int bill_id, String associate_name, int project_id, int bill_hours, int bill_rate, int bill_period,
 			int net_bill_period, int leave_days) {
 		super();
+		this.associate_id = associate_id;
 		this.bill_id = bill_id;
 		this.associate_name = associate_name;
 		this.project_id = project_id;
@@ -120,12 +135,17 @@ public class BillRate {
 		// TODO Auto-generated constructor stub
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "BillRate [bill_id=" + bill_id + ", associate_name=" + associate_name + ", project_id=" + project_id
-				+ ", bill_hours=" + bill_hours + ", bill_rate=" + bill_rate + ", bill_period=" + bill_period
-				+ ", net_bill_period=" + net_bill_period + ", leave_days=" + leave_days + "]";
+		return "BillRate [bill_id=" + bill_id + ", associate_id=" + associate_id + ", associate_name=" + associate_name
+				+ ", project_id=" + project_id + ", bill_hours=" + bill_hours + ", bill_rate=" + bill_rate
+				+ ", bill_period=" + bill_period + ", net_bill_period=" + net_bill_period + ", leave_days=" + leave_days
+				+ "]";
 	}
+
+	
 	
 	
 	 

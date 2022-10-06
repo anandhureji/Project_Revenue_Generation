@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dumping.demo.entity.Associate;
 import com.dumping.demo.entity.BillRate;
 import com.dumping.demo.repo.BillRateRepository;
 
@@ -27,7 +28,7 @@ public class BillRateService {
 	@Autowired
     private BillRateRepository billRateRepository;
 
-    public void save(MultipartFile file) throws ParseException {
+	public void save(MultipartFile file) throws ParseException {
 
         try {
             InputStream is= file.getInputStream();
@@ -41,7 +42,7 @@ public class BillRateService {
                 Iterator<Row> iterator = sh.iterator();
                 // System.out.println("Sheet name is " + sh.getSheetName());
                 // System.out.println("-----------------------------------");
-                List<String> lst = List.of("Associate Name", "Project ID","Billable Hours", "BillRate");
+                List<String> lst =  List.of("Project ID","Billable Hours","BillRate");
                 List<String> indexes=new ArrayList<String>();
 
 //                Iterator<Row> iterator = sh.iterator();
@@ -102,11 +103,6 @@ public class BillRateService {
         }
 
     }
-
-    public List<BillRate> getAllProjects() {
-        return this.billRateRepository.findAll();
-    }
-
 
 
 }

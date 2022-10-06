@@ -26,7 +26,7 @@ public class Account {
     {
         switch (property)
         {
-            case "Account ID" :
+            case "Account ID":
                 this.setAccountId( Integer.parseInt(data));
                 break;
             case "Account Name" :
